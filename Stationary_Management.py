@@ -2,7 +2,7 @@
 # Student Admin Number: 230627W
 # Tutorial Group: IT2153-01
 
-prodList = []
+prodList = [] # Global list at top-level scope (value used in functions below)
 
 class Stationary:
     def __init__(self, productID, productName, category, brand, supplierYear):
@@ -43,7 +43,7 @@ def addStationary():
             print("Invalid Inputs. Please try again.")
     newProduct = Stationary(newProductID, newProductName, newProductCategory, newProductBrand, newProductSupplierYear)
     prodList.append(newProduct)
-    print("Product added successfully!\n")
+    print("Product added successfully!")
     
 
 def displayStationary():
@@ -66,10 +66,10 @@ def bubbleSortStationary():
         print("No stationary to sort!")
     else:
         prodListLength = len(prodList)
-        for i in range(prodListLength - 1):
-            for j in range(prodListLength - i - 1):
-                if prodList[j].get_category() < prodList[j+1].get_category():
-                    prodList[j], prodList[j+1] = prodList[j+1], prodList[j]
+        for i in range(prodListLength - 1): # Worst-case scenario (most iterations)
+            for j in range(prodListLength - i - 1): # Take away the previous iterations
+                if prodList[j].get_category() < prodList[j+1].get_category(): #Check if need swap elemnts
+                    prodList[j], prodList[j+1] = prodList[j+1], prodList[j] # Swap element positions
 
             print(f"Pass {i+1}:")
             print("-----------------------------------------------")
@@ -93,13 +93,12 @@ def insertionSortStationary():
         print("No stationary to sort!")
     else:
         prodListLength = len(prodList)
-        for i in range(1, prodListLength):
-            key = prodList[i]
-            j = i - 1
-            while j >= 0 and key.get_brand() < prodList[j].get_brand():
-                prodList[j + 1] = prodList[j]
-                j -= 1
-            prodList[j + 1] = key
+        for i in range(1, prodListLength): # Start from 2nd element, assuming 1st is sorted alrd
+            j = i - 1 # Index of the element on the left
+            while j >= 0 and prodList[i].get_brand() < prodList[j].get_brand(): # Compares prodList[i] with elements on its left
+                prodList[j + 1] = prodList[j] # Swap elements
+                j -= 1 # Decrement j until it reaches index 0 and breaks out of while loop
+            prodList[j + 1] = prodList[i] # Put back prodList[i] where it belongs
             
             print(f"Pass {i}:")
             print("-----------------------------------------------")
@@ -134,12 +133,12 @@ def populateData(): # To populate data and for testing purposes
     newStudA = Stationary("PD1005", "Pop Bazic File Separator Clear", "Office Supplies", "Popular", 2000)
     prodList.append(newStudA)
     print("Data populated!\n")
-    return prodList
+    return prodList # Return the populated data as a list
                 
 
 def menu():
     global prodList
-    while True:
+    while True: # Keep menu running until user exits
         print()
         print("------------------Stationary Management System------------------")
         print("1. Add a new Stationary.")
@@ -161,14 +160,14 @@ def menu():
             elif choice == 4:
                 insertionSortStationary()
             elif choice == 5:
-                prodList = populateData()
+                prodList = populateData() # Reset the prodList to the populated data
             elif choice == 6:
                 print("Good bye!")
                 break
             else:
-                print("Invalid choice. Please try again.")
+                print("Invalid choice. Please enter a number ranging from 1-6.")
         except ValueError:
-            print("Please enter a valid number ranging from 1-6.")
+            print("Please enter a valid number.")
 
 
 menu()
