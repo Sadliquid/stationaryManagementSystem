@@ -67,8 +67,8 @@ def bubbleSortStationary():
     else:
         prodListLength = len(prodList)
         for i in range(prodListLength - 1):
-            for j in range(0, prodListLength - i - 1):
-                if prodList[j].get_category() > prodList[j+1].get_category():
+            for j in range(prodListLength - i - 1):
+                if prodList[j].get_category() < prodList[j+1].get_category():
                     prodList[j], prodList[j+1] = prodList[j+1], prodList[j]
 
             print(f"Pass {i+1}:")
@@ -96,7 +96,7 @@ def insertionSortStationary():
         for i in range(1, prodListLength):
             key = prodList[i]
             j = i - 1
-            while j >= 0 and key.get_brand() > prodList[j].get_brand():
+            while j >= 0 and key.get_brand() < prodList[j].get_brand():
                 prodList[j + 1] = prodList[j]
                 j -= 1
             prodList[j + 1] = key
@@ -104,7 +104,7 @@ def insertionSortStationary():
             print(f"Pass {i}:")
             print("-----------------------------------------------")
             for k in range(len(prodList)):
-                print(f"{prodList[k].get_productID()}")
+                print(f"Product_ID: {prodList[k].get_productID()}")
             print("-----------------------------------------------")
 
         print("---------------Sorted Stationary List---------------")
@@ -148,6 +148,7 @@ def menu():
         print("4. Sort Stationary via Insertion Sort on Brand.")
         print("5. Populate data.")
         print("6. Exit program.")
+        print()
 
         try:
             choice = int(input("Please select one: "))
