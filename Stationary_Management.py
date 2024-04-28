@@ -55,6 +55,7 @@ def displayStationary():
     if len(prodList) == 0:
         print("There are currently no products in the system!")
     else:
+        print()
         print("---------------------Products List---------------------")
         for i in range(len(prodList)):
             print(f"Product ID: {prodList[i].get_productID()}")
@@ -70,6 +71,7 @@ def bubbleSortStationary():
         print("No stationary to sort!")
     else:
         prodListLength = len(prodList)
+        print()
         for i in range(prodListLength - 1): # Worst-case scenario (most iterations)
             for j in range(prodListLength - i - 1): # Take away the previous iterations
                 if prodList[j].get_category() < prodList[j+1].get_category(): #Check if need swap elemnts
@@ -81,6 +83,7 @@ def bubbleSortStationary():
                 print(f"Product_ID: {prodList[k].get_productID()}")
             print("-----------------------------------------------")
         
+        print()
         print("---------------Sorted Stationary List---------------")
         for product in range(len(prodList)):
             print(f"Product ID: {prodList[product].get_productID()}")
@@ -97,12 +100,16 @@ def insertionSortStationary():
         print("No stationary to sort!")
     else:
         prodListLength = len(prodList)
-        for i in range(1, prodListLength): # Start from 2nd element, assuming 1st is sorted alrd
+        print()
+        for i in range(1, prodListLength): # Start from 2nd element, assuming 1st is sorted already
+            keyElement = prodList[i] # Store the current element to be compared
             j = i - 1 # Index of the element on the left
-            while j >= 0 and prodList[i].get_brand() < prodList[j].get_brand(): # Compares prodList[i] with elements on its left
-                prodList[j + 1] = prodList[j] # Swap elements
-                j -= 1 # Decrement j until it reaches index 0 and breaks out of while loop
-            prodList[j + 1] = prodList[i] # Put back prodList[i] where it belongs
+
+            while j >= 0 and keyElement.get_brand() < prodList[j].get_brand(): # Compares key with elements on its left
+                prodList[j + 1] = prodList[j] # Move the element to the right
+                j -= 1 # Decrement j until it reaches index 0 and breaks out of the loop
+
+            prodList[j + 1] = keyElement # Put back the keyElement where it belongs
             
             print(f"Pass {i}:")
             print("-----------------------------------------------")
@@ -110,6 +117,7 @@ def insertionSortStationary():
                 print(f"Product_ID: {prodList[k].get_productID()}")
             print("-----------------------------------------------")
 
+        print()
         print("---------------Sorted Stationary List---------------")
         for product in range(len(prodList)):
             print(f"Product ID: {prodList[product].get_productID()}")
