@@ -31,18 +31,22 @@ class Stationary:
 
 def addStationary():
     global prodList
+    newProductID = str(input("Enter Product ID: "))
+    newProductName = str(input("Enter Product Name: "))
+    newProductCategory = str(input("Enter Product Category: "))
+    newProductBrand = str(input("Enter Brand: "))
+
     while True:
+        newProductSupplierYear = input("Please enter the year this supplier started supplying this product: ")
         try:
-            newProductID = str(input("Enter Product ID: "))
-            newProductName = str(input("Enter Product Name: "))
-            newProductCategory = str(input("Enter Product Category: "))
-            newProductBrand = str(input("Enter Brand: "))
-            newProductSupplierYear = int(input("Please enter the year this supplier started supplying this product: "))
+            newProductSupplierYear = int(newProductSupplierYear)
             break
         except ValueError:
-            print("Invalid Inputs. Please try again.")
+            print("Please enter a valid integer for Supplier Year.")
+
     newProduct = Stationary(newProductID, newProductName, newProductCategory, newProductBrand, newProductSupplierYear)
     prodList.append(newProduct)
+    print()
     print("Product added successfully!")
     
 
@@ -145,8 +149,8 @@ def menu():
         print("2. Display all Stationary.")
         print("3. Sort Stationary via Bubble Sort on Category.")
         print("4. Sort Stationary via Insertion Sort on Brand.")
-        print("5. Populate data.")
-        print("6. Exit program.")
+        print("9. Populate data.")
+        print("0. Exit program.")
         print()
 
         try:
@@ -159,13 +163,14 @@ def menu():
                 bubbleSortStationary()
             elif choice == 4:
                 insertionSortStationary()
-            elif choice == 5:
+            elif choice == 9:
                 prodList = populateData() # Reset the prodList to the populated data
-            elif choice == 6:
+            elif choice == 0:
                 print("Good bye!")
+                print()
                 break
             else:
-                print("Invalid choice. Please enter a number ranging from 1-6.")
+                print("Invalid choice. Please enter either [0, 1, 2, 3, 4 or 9].")
         except ValueError:
             print("Please enter a valid number.")
 
