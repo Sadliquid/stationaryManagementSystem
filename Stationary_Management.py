@@ -2,7 +2,7 @@
 # Student Admin Number: 230627W
 # Tutorial Group: IT2153-01
 
-prodList = [] # Global list at top-level scope (value used in functions below)
+prodDict = {} # global dictionary
 
 class Stationary:
     def __init__(self, productID, productName, category, brand, supplierYear):
@@ -30,7 +30,7 @@ class Stationary:
 
 
 def addStationary():
-    global prodList
+    global prodDict
     newProductID = str(input("Enter Product ID: "))
     newProductName = str(input("Enter Product Name: "))
     newProductCategory = str(input("Enter Product Category: "))
@@ -42,115 +42,130 @@ def addStationary():
             newProductSupplierYear = int(newProductSupplierYear)
             break
         except ValueError:
+            print()
             print("Please enter a valid integer for Supplier Year.")
 
     newProduct = Stationary(newProductID, newProductName, newProductCategory, newProductBrand, newProductSupplierYear)
-    prodList.append(newProduct)
+    prodDict[newProduct.get_productID()] = newProduct # using newProductID as the {PK}
     print()
     print("Product added successfully!")
     
 
 def displayStationary():
-    global prodList
-    if len(prodList) == 0:
+    global prodDict
+    if len(prodDict) == 0:
+        print()
         print("There are currently no products in the system!")
     else:
         print()
         print("---------------------Products List---------------------")
-        for i in range(len(prodList)):
-            print(f"Product ID: {prodList[i].get_productID()}")
-            print(f"Product Name: {prodList[i].get_productName()}")
-            print(f"Product Category: {prodList[i].get_category()}")
-            print(f"Brand: {prodList[i].get_brand()}")
-            print(f"Supplier Year: {prodList[i].get_supplierYear()}")
+        for stationary in prodDict.values():
+            print(f"Product ID: {stationary.get_productID()}")
+            print(f"Product Name: {stationary.get_productName()}")
+            print(f"Product Category: {stationary.get_category()}")
+            print(f"Brand: {stationary.get_brand()}")
+            print(f"Supplier Year: {stationary.get_supplierYear()}")
             print("-----------------------------------------------")
 
 def bubbleSortStationary():
-    global prodList
-    if len(prodList) == 0:
+    global prodDict
+    tempProdList = list(prodDict.values())
+    if len(tempProdList) == 0:
+        print()
         print("No stationary to sort!")
     else:
-        prodListLength = len(prodList)
+        prodListLength = len(tempProdList)
         print()
-        for i in range(prodListLength - 1): # Worst-case scenario (most iterations)
-            for j in range(prodListLength - i - 1): # Take away the previous iterations
-                if prodList[j].get_category() < prodList[j+1].get_category(): #Check if need swap elemnts
-                    prodList[j], prodList[j+1] = prodList[j+1], prodList[j] # Swap element positions
+        for i in range(prodListLength - 1): # worst-case scenario (most iterations)
+            for j in range(prodListLength - i - 1): # take away the previous iterations
+                if tempProdList[j].get_category() < tempProdList[j+1].get_category(): #check if need swap elemnts
+                    tempProdList[j], tempProdList[j+1] = tempProdList[j+1], tempProdList[j] # swap element positions
 
             print(f"Pass {i+1}:")
             print("-----------------------------------------------")
-            for k in range(len(prodList)):
-                print(f"Product_ID: {prodList[k].get_productID()}")
+            for k in range(len(tempProdList)):
+                print(f"Product_ID: {tempProdList[k].get_productID()}")
             print("-----------------------------------------------")
         
         print()
         print("---------------Sorted Stationary List---------------")
-        for product in range(len(prodList)):
-            print(f"Product ID: {prodList[product].get_productID()}")
-            print(f"Product Name: {prodList[product].get_productName()}")
-            print(f"Product Category: {prodList[product].get_category()}")
-            print(f"Brand: {prodList[product].get_brand()}")
-            print(f"Supplier Year: {prodList[product].get_supplierYear()}")
+        for product in range(len(tempProdList)):
+            print(f"Product ID: {tempProdList[product].get_productID()}")
+            print(f"Product Name: {tempProdList[product].get_productName()}")
+            print(f"Product Category: {tempProdList[product].get_category()}")
+            print(f"Brand: {tempProdList[product].get_brand()}")
+            print(f"Supplier Year: {tempProdList[product].get_supplierYear()}")
             print("-----------------------------------------------")
+
+        prodDict = {}
+        for stationary in tempProdList:
+            prodDict[stationary.get_productID()] = stationary # clear previous dict and update with sorted values
                 
 
 def insertionSortStationary():
-    global prodList
-    if len(prodList) == 0:
+    global prodDict
+    tempProdList = list(prodDict.values())
+    if len(tempProdList) == 0:
+        print()
         print("No stationary to sort!")
     else:
-        prodListLength = len(prodList)
+        prodListLength = len(tempProdList)
         print()
-        for i in range(1, prodListLength): # Start from 2nd element, assuming 1st is sorted already
-            keyElement = prodList[i] # Store the current element to be compared
-            j = i - 1 # Index of the element on the left
+        for i in range(1, prodListLength): # start from 2nd element cos assume 1st is sorted already
+            keyElement = tempProdList[i] # store the current element to be compared
+            j = i - 1 # index of the element on the left
 
-            while j >= 0 and keyElement.get_brand() < prodList[j].get_brand(): # Compares key with elements on its left
-                prodList[j + 1] = prodList[j] # Move the element to the right
-                j -= 1 # Decrement j until it reaches index 0 and breaks out of the loop
+            while j >= 0 and keyElement.get_brand() < tempProdList[j].get_brand(): # compare key with elements on the left
+                tempProdList[j + 1] = tempProdList[j] # move element to the right
+                j -= 1 # decrement j until it reaches index 0 and breaks out of the loop
 
-            prodList[j + 1] = keyElement # Put back the keyElement where it belongs
+            tempProdList[j + 1] = keyElement # put back keyElement where it belongs
             
             print(f"Pass {i}:")
             print("-----------------------------------------------")
-            for k in range(len(prodList)):
-                print(f"Product_ID: {prodList[k].get_productID()}")
+            for k in range(len(tempProdList)):
+                print(f"Product_ID: {tempProdList[k].get_productID()}")
             print("-----------------------------------------------")
 
         print()
         print("---------------Sorted Stationary List---------------")
-        for product in range(len(prodList)):
-            print(f"Product ID: {prodList[product].get_productID()}")
-            print(f"Product Name: {prodList[product].get_productName()}")
-            print(f"Product Category: {prodList[product].get_category()}")
-            print(f"Brand: {prodList[product].get_brand()}")
-            print(f"Supplier Year: {prodList[product].get_supplierYear()}")
+        for product in range(len(tempProdList)):
+            print(f"Product ID: {tempProdList[product].get_productID()}")
+            print(f"Product Name: {tempProdList[product].get_productName()}")
+            print(f"Product Category: {tempProdList[product].get_category()}")
+            print(f"Brand: {tempProdList[product].get_brand()}")
+            print(f"Supplier Year: {tempProdList[product].get_supplierYear()}")
             print("-----------------------------------------------")
 
-def populateData(): # To populate data and for testing purposes
-    global prodList
-    prodList = []
+        prodDict = {}
+        for stationary in tempProdList:
+            prodDict[stationary.get_productID()] = stationary # clear previous dict and update with sorted values
+
+def populateData(): # populate data and for testing purposes
+    global prodDict
+    prodDict = {}
     newStudA = Stationary("PD1020", "Pastel Art Paper", "Paper", "Faber-Castell", 2021)
-    prodList.append(newStudA)
+    prodDict[newStudA.get_productID()] = newStudA
     newStudA = Stationary("PD1025", "Mars Lumograph Drawing Pencils", "Pencils", "Staedtler", 2022)
-    prodList.append(newStudA)
+    prodDict[newStudA.get_productID()] = newStudA
     newStudA = Stationary("PD1015", "Water color Pencils", "Pencils", "Faber-Castell", 2011)
-    prodList.append(newStudA)
+    prodDict[newStudA.get_productID()] = newStudA
     newStudA = Stationary("PD1050", "Noris 320 fiber tip pen", "Pens", "Staedtler", 2021)
-    prodList.append(newStudA)
+    prodDict[newStudA.get_productID()] = newStudA
     newStudA = Stationary("PD1001", "Copier Paper (A4) 70GSM", "Paper", "PaperOne", 2021)
-    prodList.append(newStudA)
+    prodDict[newStudA.get_productID()] = newStudA
     newStudA = Stationary("PD1033", "Scientific Calculator FX-97SG X", "Calculator", "Casio", 2022)
-    prodList.append(newStudA)
+    prodDict[newStudA.get_productID()] = newStudA
     newStudA = Stationary("PD1005", "Pop Bazic File Separator Clear", "Office Supplies", "Popular", 2000)
-    prodList.append(newStudA)
+    prodDict[newStudA.get_productID()] = newStudA
+    print()
     print("Data populated!\n")
-    return prodList # Return the populated data as a list
+    return prodDict # return the populated data as dictionary
                 
 
 def menu():
-    global prodList
-    while True: # Keep menu running until user exits
+    global prodDict
+    while True:
         print()
         print("------------------Stationary Management System------------------")
         print("1. Add a new Stationary.")
@@ -172,14 +187,17 @@ def menu():
             elif choice == 4:
                 insertionSortStationary()
             elif choice == 9:
-                prodList = populateData() # Reset the prodList to the populated data
+                prodDict = populateData()
             elif choice == 0:
-                print("Good bye!")
+                print()
+                print("Program quit. Good bye!")
                 print()
                 break
             else:
+                print()
                 print("Invalid choice. Please enter either [0, 1, 2, 3, 4 or 9].")
         except ValueError:
+            print()
             print("Please enter a valid number.")
 
 
