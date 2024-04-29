@@ -40,10 +40,16 @@ def addStationary():
         newProductSupplierYear = input("Please enter the year this supplier started supplying this product: ")
         try:
             newProductSupplierYear = int(newProductSupplierYear)
-            break
+            if len(str(newProductSupplierYear)) == 4 and newProductSupplierYear > 0:
+                break
+            else:
+                print()
+                print("Please enter a valid positive year (YYYY).")
+                print()
         except ValueError:
             print()
-            print("Please enter a valid integer for Supplier Year.")
+            print("Only numbers are allowed. Please enter a valid year (YYYY).")
+            print()
 
     newProduct = Stationary(newProductID, newProductName, newProductCategory, newProductBrand, newProductSupplierYear)
     prodDict[newProduct.get_productID()] = newProduct # using newProductID as the {PK}
@@ -159,7 +165,7 @@ def populateData(): # populate data and for testing purposes
     newStudA = Stationary("PD1005", "Pop Bazic File Separator Clear", "Office Supplies", "Popular", 2000)
     prodDict[newStudA.get_productID()] = newStudA
     print()
-    print("Data populated!\n")
+    print("Data populated!")
     return prodDict # return the populated data as dictionary
                 
 
