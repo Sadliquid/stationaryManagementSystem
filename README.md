@@ -24,7 +24,9 @@ This console application helps the staff of a company, specialising in stationar
 ## Sources and credits
 The following are where I sourced for info and got help from throughout this whole project, as well as owe credit to:
 - [Bubble Sort (GeeksForGeeks)](https://www.geeksforgeeks.org/bubble-sort/)
+- [Bubble Sort (W3 Schools)](https://www.w3schools.com/dsa/dsa_algo_bubblesort.php)
 - [Insertion Sort (GeeksForGeeks)](https://www.geeksforgeeks.org/insertion-sort/)
+- [Insertion Sort (W3 Schools)](https://www.w3schools.com/dsa/dsa_algo_insertionsort.php)
 - [Google Gemini](https://gemini.google.com/app)
 
 ## Submission details
