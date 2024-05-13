@@ -9,7 +9,15 @@ prodDict = {} # global dictionary
 
 def addStationary():
     global prodDict
-    newProductID = str(input("Enter Product ID: "))
+    productKeysList = list(prodDict.keys())
+    while True:
+        newProductID = str(input("Enter Product ID: "))
+        if newProductID in productKeysList:
+            print()
+            print("Product ID already exists. Please enter a unique Product ID.")
+            print()
+        else:
+            break
     newProductName = str(input("Enter Product Name: "))
     newProductCategory = str(input("Enter Product Category: "))
     newProductBrand = str(input("Enter Brand: "))
