@@ -2,31 +2,9 @@
 # Student Admin Number: 230627W
 # Tutorial Group: IT2153-01
 
+from Stationary import Stationary
+
 prodDict = {} # global dictionary
-
-class Stationary:
-    def __init__(self, productID, productName, category, brand, supplierYear):
-        self.productID = productID
-        self.productName = productName
-        self.category = category
-        self.brand = brand
-        self.supplierYear = supplierYear
-
-    def get_productID(self):
-        return self.productID
-    
-    def get_productName(self):
-        return self.productName
-    
-    def get_category(self):
-        return self.category
-    
-    def get_brand(self):
-        return self.brand
-    
-    def get_supplierYear(self):
-        return self.supplierYear
-
 
 
 def addStationary():
