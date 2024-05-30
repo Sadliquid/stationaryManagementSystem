@@ -1,3 +1,7 @@
+# Name: Joshua Long Yu Xuan
+# Student Admin Number: 230627W
+# Tutorial Group: IT2153-01
+
 class Stationary:
     def __init__(self, productID, productName, category, brand, supplierYear):
         self.productID = productID
