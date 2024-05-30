@@ -23,10 +23,10 @@ def addStationary():
     newProductBrand = str(input("Enter Brand: "))
 
     while True:
-        newProductSupplierYear = input("Please enter the year this supplier started supplying this product: ")
+        newProductSupplier_since = input("Please enter the year this supplier started supplying this product: ")
         try:
-            newProductSupplierYear = int(newProductSupplierYear)
-            if len(str(newProductSupplierYear)) == 4 and newProductSupplierYear > 0:
+            newProductSupplier_since = int(newProductSupplier_since)
+            if len(str(newProductSupplier_since)) == 4 and newProductSupplier_since > 0:
                 break
             else:
                 print()
@@ -37,8 +37,8 @@ def addStationary():
             print("Only numbers are allowed. Please enter a valid year (YYYY).")
             print()
 
-    newProduct = Stationary(newProductID, newProductName, newProductCategory, newProductBrand, newProductSupplierYear)
-    prodDict[newProduct.get_productID()] = newProduct # using newProductID as the {PK}
+    newProduct = Stationary(newProductID, newProductName, newProductCategory, newProductBrand, newProductSupplier_since)
+    prodDict[newProduct.get_Prod_id()] = newProduct # using newProductID as the {PK}
     print()
     print("Product added successfully!")
     
@@ -52,11 +52,11 @@ def displayStationary():
         print()
         print("---------------------Products List---------------------")
         for stationary in prodDict.values():
-            print(f"Product ID: {stationary.get_productID()}")
-            print(f"Product Name: {stationary.get_productName()}")
+            print(f"Product ID: {stationary.get_Prod_id()}")
+            print(f"Product Name: {stationary.get_ProdName()}")
             print(f"Product Category: {stationary.get_category()}")
             print(f"Brand: {stationary.get_brand()}")
-            print(f"Supplier Year: {stationary.get_supplierYear()}")
+            print(f"Supplier Year: {stationary.get_Supplier_since()}")
             print("-----------------------------------------------")
 
 def bubbleSortStationary():
@@ -76,22 +76,22 @@ def bubbleSortStationary():
             print(f"Pass {i+1}:")
             print("-----------------------------------------------")
             for k in range(len(tempProdList)):
-                print(f"Product_ID: {tempProdList[k].get_productID()}")
+                print(f"Product_ID: {tempProdList[k].get_Prod_id()}")
             print("-----------------------------------------------")
         
         print()
-        print("---------------Sorted Stationary List---------------")
+        print("---------------Bubble Sorted Stationary List---------------")
         for product in range(len(tempProdList)):
-            print(f"Product ID: {tempProdList[product].get_productID()}")
-            print(f"Product Name: {tempProdList[product].get_productName()}")
+            print(f"Product ID: {tempProdList[product].get_Prod_id()}")
+            print(f"Product Name: {tempProdList[product].get_ProdName()}")
             print(f"Product Category: {tempProdList[product].get_category()}")
             print(f"Brand: {tempProdList[product].get_brand()}")
-            print(f"Supplier Year: {tempProdList[product].get_supplierYear()}")
+            print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
             print("-----------------------------------------------")
 
         prodDict = {}
         for stationary in tempProdList:
-            prodDict[stationary.get_productID()] = stationary # clear previous dict and update with sorted values
+            prodDict[stationary.get_Prod_id()] = stationary # clear previous dict and update with sorted values
                 
 
 def insertionSortStationary():
@@ -116,40 +116,40 @@ def insertionSortStationary():
             print(f"Pass {i}:")
             print("-----------------------------------------------")
             for k in range(len(tempProdList)):
-                print(f"Product_ID: {tempProdList[k].get_productID()}")
+                print(f"Product_ID: {tempProdList[k].get_Prod_id()}")
             print("-----------------------------------------------")
 
         print()
-        print("---------------Sorted Stationary List---------------")
+        print("---------------Insertion Sorted Stationary List---------------")
         for product in range(len(tempProdList)):
-            print(f"Product ID: {tempProdList[product].get_productID()}")
-            print(f"Product Name: {tempProdList[product].get_productName()}")
+            print(f"Product ID: {tempProdList[product].get_Prod_id()}")
+            print(f"Product Name: {tempProdList[product].get_ProdName()}")
             print(f"Product Category: {tempProdList[product].get_category()}")
             print(f"Brand: {tempProdList[product].get_brand()}")
-            print(f"Supplier Year: {tempProdList[product].get_supplierYear()}")
+            print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
             print("-----------------------------------------------")
 
         prodDict = {}
         for stationary in tempProdList:
-            prodDict[stationary.get_productID()] = stationary # clear previous dict and update with sorted values
+            prodDict[stationary.get_Prod_id()] = stationary # clear previous dict and update with sorted values
 
 def populateData(): # populate data and for testing purposes
     global prodDict
     prodDict = {}
     newStudA = Stationary("PD1020", "Pastel Art Paper", "Paper", "Faber-Castell", 2021)
-    prodDict[newStudA.get_productID()] = newStudA
+    prodDict[newStudA.get_Prod_id()] = newStudA
     newStudA = Stationary("PD1025", "Mars Lumograph Drawing Pencils", "Pencils", "Staedtler", 2022)
-    prodDict[newStudA.get_productID()] = newStudA
+    prodDict[newStudA.get_Prod_id()] = newStudA
     newStudA = Stationary("PD1015", "Water color Pencils", "Pencils", "Faber-Castell", 2011)
-    prodDict[newStudA.get_productID()] = newStudA
+    prodDict[newStudA.get_Prod_id()] = newStudA
     newStudA = Stationary("PD1050", "Noris 320 fiber tip pen", "Pens", "Staedtler", 2021)
-    prodDict[newStudA.get_productID()] = newStudA
+    prodDict[newStudA.get_Prod_id()] = newStudA
     newStudA = Stationary("PD1001", "Copier Paper (A4) 70GSM", "Paper", "PaperOne", 2021)
-    prodDict[newStudA.get_productID()] = newStudA
+    prodDict[newStudA.get_Prod_id()] = newStudA
     newStudA = Stationary("PD1033", "Scientific Calculator FX-97SG X", "Calculator", "Casio", 2022)
-    prodDict[newStudA.get_productID()] = newStudA
+    prodDict[newStudA.get_Prod_id()] = newStudA
     newStudA = Stationary("PD1005", "Pop Bazic File Separator Clear", "Office Supplies", "Popular", 2000)
-    prodDict[newStudA.get_productID()] = newStudA
+    prodDict[newStudA.get_Prod_id()] = newStudA
     print()
     print("Data populated!")
     return prodDict # return the populated data as dictionary
