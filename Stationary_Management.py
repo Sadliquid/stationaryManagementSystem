@@ -37,7 +37,22 @@ def addStationary():
             print("Only numbers are allowed. Please enter a valid year (YYYY).")
             print()
 
-    newProduct = Stationary(newProductID, newProductName, newProductCategory, newProductBrand, newProductSupplier_since)
+    while True:
+        newProductStock = input("Please enter the stock quantity: ")
+        try:
+            newProductStock = int(newProductStock)
+            if newProductStock > 0:
+                break
+            else:
+                print()
+                print("Product stock must be more than 0.")
+                print()
+        except ValueError:
+            print()
+            print("Only numbers are allowed. Please enter a valid number.")
+            print()
+
+    newProduct = Stationary(newProductID, newProductName, newProductCategory, newProductBrand, newProductSupplier_since, newProductStock)
     prodDict[newProduct.get_Prod_id()] = newProduct # using newProductID as the {PK}
     print()
     print("Product added successfully!")
@@ -57,6 +72,7 @@ def displayStationary():
             print(f"Product Category: {stationary.get_category()}")
             print(f"Brand: {stationary.get_brand()}")
             print(f"Supplier Year: {stationary.get_Supplier_since()}")
+            print(f"Stock: {stationary.get_Stock()}")
             print("-----------------------------------------------")
 
 def bubbleSortStationary():
@@ -133,22 +149,34 @@ def insertionSortStationary():
         for stationary in tempProdList:
             prodDict[stationary.get_Prod_id()] = stationary # clear previous dict and update with sorted values
 
+def selectionSortStationary():
+    pass
+
+def mergeSortStationary():
+    pass
+
+def restockStationary():
+    pass
+
+def setRecordsPerRow():
+    pass
+
 def populateData(): # populate data and for testing purposes
     global prodDict
     prodDict = {}
-    newStudA = Stationary("PD1020", "Pastel Art Paper", "Paper", "Faber-Castell", 2021)
+    newStudA = Stationary("PD1020", "Pastel Art Paper", "Paper", "Faber-Castell", 2021, 2000)
     prodDict[newStudA.get_Prod_id()] = newStudA
-    newStudA = Stationary("PD1025", "Mars Lumograph Drawing Pencils", "Pencils", "Staedtler", 2022)
+    newStudA = Stationary("PD1025", "Mars Lumograph Drawing Pencils", "Pencils", "Staedtler", 2022, 320)
     prodDict[newStudA.get_Prod_id()] = newStudA
-    newStudA = Stationary("PD1015", "Water color Pencils", "Pencils", "Faber-Castell", 2011)
+    newStudA = Stationary("PD1015", "Water color Pencils", "Pencils", "Faber-Castell", 2011, 150)
     prodDict[newStudA.get_Prod_id()] = newStudA
-    newStudA = Stationary("PD1050", "Noris 320 fiber tip pen", "Pens", "Staedtler", 2021)
+    newStudA = Stationary("PD1050", "Noris 320 fiber tip pen", "Pens", "Staedtler", 2021, 350)
     prodDict[newStudA.get_Prod_id()] = newStudA
-    newStudA = Stationary("PD1001", "Copier Paper (A4) 70GSM", "Paper", "PaperOne", 2021)
+    newStudA = Stationary("PD1001", "Copier Paper (A4) 70GSM", "Paper", "PaperOne", 2021, 1500)
     prodDict[newStudA.get_Prod_id()] = newStudA
-    newStudA = Stationary("PD1033", "Scientific Calculator FX-97SG X", "Calculator", "Casio", 2022)
+    newStudA = Stationary("PD1033", "Scientific Calculator FX-97SG X", "Calculator", "Casio", 2022, 50)
     prodDict[newStudA.get_Prod_id()] = newStudA
-    newStudA = Stationary("PD1005", "Pop Bazic File Separator Clear", "Office Supplies", "Popular", 2000)
+    newStudA = Stationary("PD1005", "Pop Bazic File Separator Clear", "Office Supplies", "Popular", 2000, 500)
     prodDict[newStudA.get_Prod_id()] = newStudA
     print()
     print("Data populated!")
@@ -164,6 +192,10 @@ def menu():
         print("2. Display all Stationary.")
         print("3. Sort Stationary via Bubble Sort on Category.")
         print("4. Sort Stationary via Insertion Sort on Brand.")
+        print("5. Sort Stationary via Selection Sort on Prod_id.")
+        print("6. Sort Stationary via Merge Sort on Category follow by Stock in ascending order.")
+        print("7. Go to Restocking Menu.")
+        print("8. Set number of records per row to display.")
         print("9. Populate data.")
         print("0. Exit program.")
         print()
@@ -178,6 +210,14 @@ def menu():
                 bubbleSortStationary()
             elif choice == 4:
                 insertionSortStationary()
+            elif choice == 5:
+                selectionSortStationary()
+            elif choice == 6:
+                mergeSortStationary()
+            elif choice == 7:
+                restockStationary()
+            elif choice == 8:
+                setRecordsPerRow()
             elif choice == 9:
                 prodDict = populateData()
             elif choice == 0:

@@ -3,12 +3,13 @@
 # Tutorial Group: IT2153-01
 
 class Stationary:
-    def __init__(self, Prod_id, ProdName, category, brand, Supplier_since):
+    def __init__(self, Prod_id, ProdName, category, brand, Supplier_since, Stock):
         self.Prod_id = Prod_id
         self.ProdName = ProdName
         self.category = category
         self.brand = brand
         self.Supplier_since = Supplier_since
+        self.Stock = Stock
 
     def get_Prod_id(self):
         return self.Prod_id
@@ -39,3 +40,9 @@ class Stationary:
     
     def set_Supplier_since(self, Supplier_since):
         self.Supplier_since = Supplier_since
+
+    def get_Stock(self):
+        return self.Stock
+    
+    def set_Stock(self, Stock):
+        self.Stock = Stock
