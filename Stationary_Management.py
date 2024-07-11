@@ -155,8 +155,43 @@ def selectionSortStationary():
 def mergeSortStationary():
     pass
 
-def restockStationary():
+def restockProduct():
     pass
+
+def numberOfStockArrival():
+    pass
+
+def serviceNextRestock():
+    pass
+
+def restockMenu():
+    while True:
+        print()
+        print("Restocking Menu: ")
+        print("1. Enter new stock arrival.")
+        print("2. View Number of stock arrival.")
+        print("3. Service next restock in queue.")
+        print("0. Return to Main Menu.")
+        print()
+
+        try:
+            choice = int(input("Please select one: "))
+            if choice == 1:
+                restockProduct()
+            elif choice == 2:
+                numberOfStockArrival()
+            elif choice == 3:
+                serviceNextRestock()
+            elif choice == 0:
+                print()
+                print("Exiting to main menu...")
+                break
+            else:
+                print()
+                print("Invalid choice. Please enter either [0, 1, 2 or 3].")
+        except ValueError:
+            print()
+            print("Please enter a valid number as a choice.")
 
 def setRecordsPerRow():
     pass
@@ -215,7 +250,7 @@ def menu():
             elif choice == 6:
                 mergeSortStationary()
             elif choice == 7:
-                restockStationary()
+                restockMenu()
             elif choice == 8:
                 setRecordsPerRow()
             elif choice == 9:
