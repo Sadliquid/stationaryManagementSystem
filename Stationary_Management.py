@@ -149,8 +149,37 @@ def insertionSortStationary():
         for stationary in tempProdList:
             prodDict[stationary.get_Prod_id()] = stationary # clear previous dict and update with sorted values
 
-def selectionSortStationary():
-    pass
+def selectionSortStationary(): # Sort by descending order of Prod_id
+    global prodDict
+    tempProdList = list(prodDict.values())
+    if len(tempProdList) == 0:
+        print()
+        print("No stationary to sort!")
+    else:
+        prodListLength = len(tempProdList)
+        print()
+        for i in range(prodListLength):
+            largestItemIndex = i
+            for j in range(i+1, prodListLength):
+                if tempProdList[j].get_Prod_id() > tempProdList[largestItemIndex].get_Prod_id():
+                    largestItemIndex = j
+            tempProdList[i], tempProdList[largestItemIndex] = tempProdList[largestItemIndex], tempProdList[i]
+
+            print(f"Pass {i + 1}:")
+            print("-----------------------------------------------")
+            for k in range(len(tempProdList)):
+                print(f"Product_ID: {tempProdList[k].get_Prod_id()}")
+            print("-----------------------------------------------")
+
+        print()
+        print("---------------Selection Sorted Stationary List---------------")
+        for product in range(len(tempProdList)):
+            print(f"Product ID: {tempProdList[product].get_Prod_id()}")
+            print(f"Product Name: {tempProdList[product].get_ProdName()}")
+            print(f"Product Category: {tempProdList[product].get_category()}")
+            print(f"Brand: {tempProdList[product].get_brand()}")
+            print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
+            print("-----------------------------------------------")
 
 def mergeSortStationary():
     pass
