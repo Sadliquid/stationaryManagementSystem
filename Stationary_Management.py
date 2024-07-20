@@ -7,6 +7,7 @@ from RestockDetail import RestockDetail
 from RestockingQ import RestockingQ
 
 prodDict = {} # global dictionary
+deliveryQueue = RestockingQ() # global queue
 
 
 def addStationary():
@@ -249,10 +250,31 @@ def mergeSortStationary():
             prodDict[stationary.get_Prod_id()] = stationary  # update dictionary with merge-sorted values
 
 def restockProduct():
-    pass
+    global prodDict
+    global deliveryQueue
+    productKeysList = list(prodDict.keys())
+    while True:
+        restockProdID = str(input("Enter Product ID to restock: "))
+        searchResult = sequentialSearch(productKeysList, restockProdID)
+        if searchResult != -1:
+            restockQuantity = int(input("Enter quantity to restock: "))
+            restockDetail = RestockDetail(restockProdID, restockQuantity)
+            deliveryQueue.enqueue(restockDetail)
+            print()
+            print("Restocking arival queued successfully!")
+            print()
+            break
+        else:
+            print()
+            print("Product ID not found in the system. Please enter a valid Product ID.")
+            print()
+
+
 
 def numberOfStockArrival():
-    pass
+    global deliveryQueue
+    print()
+    print(f"Number of restocking in queue: {deliveryQueue.len()}")
 
 def serviceNextRestock():
     pass
@@ -288,6 +310,13 @@ def restockMenu():
 
 def setRecordsPerRow():
     pass
+
+def sequentialSearch(array, target):
+    for i in range(len(array)):
+        if array[i] == target:
+            return i
+    return -1
+
 
 def populateData(): # populate data and for testing purposes
     global prodDict
