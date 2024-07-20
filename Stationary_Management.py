@@ -3,6 +3,8 @@
 # Tutorial Group: IT2153-01
 
 from Stationary import Stationary
+from RestockDetail import RestockDetail
+from RestockingQ import RestockingQ
 
 prodDict = {} # global dictionary
 
@@ -103,6 +105,7 @@ def bubbleSortStationary():
             print(f"Product Category: {tempProdList[product].get_category()}")
             print(f"Brand: {tempProdList[product].get_brand()}")
             print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
+            print(f"Stock: {tempProdList[product].get_Stock()}")
             print("-----------------------------------------------")
 
         prodDict = {}
@@ -143,6 +146,7 @@ def insertionSortStationary():
             print(f"Product Category: {tempProdList[product].get_category()}")
             print(f"Brand: {tempProdList[product].get_brand()}")
             print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
+            print(f"Stock: {tempProdList[product].get_Stock()}")
             print("-----------------------------------------------")
 
         prodDict = {}
@@ -179,10 +183,70 @@ def selectionSortStationary(): # Sort by descending order of Prod_id
             print(f"Product Category: {tempProdList[product].get_category()}")
             print(f"Brand: {tempProdList[product].get_brand()}")
             print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
+            print(f"Stock: {tempProdList[product].get_Stock()}")
             print("-----------------------------------------------")
 
 def mergeSortStationary():
-    pass
+    global prodDict
+    tempProdList = list(prodDict.values())
+    if len(tempProdList) == 0:
+        print()
+        print("No stationary to sort!")
+    else:
+        def mergeSort(tempProdList):
+            if len(tempProdList) > 1:
+                mid = len(tempProdList) // 2 # get the median index
+                leftHalf = tempProdList[:mid]
+                rightHalf = tempProdList[mid:]
+
+                mergeSort(leftHalf) # recursive call to split the left half until it reaches smallest size
+                mergeSort(rightHalf) # recursive call to split the right half until it reaches smallest size
+
+                i = j = k = 0 # i for leftHalf, j for rightHalf, k for tempProdList
+
+                while i < len(leftHalf) and j < len(rightHalf):
+                    if leftHalf[i].get_category() < rightHalf[j].get_category() or (
+                        leftHalf[i].get_category() == rightHalf[j].get_category() and
+                        leftHalf[i].get_Stock() < rightHalf[j].get_Stock()):
+                        tempProdList[k] = leftHalf[i]
+                        i += 1
+                    else:
+                        tempProdList[k] = rightHalf[j]
+                        j += 1
+                    k += 1
+
+                while i < len(leftHalf): # if there are still elements in the leftHalf, add it to tempProdList
+                    tempProdList[k] = leftHalf[i]
+                    i += 1
+                    k += 1
+
+                while j < len(rightHalf): # if there are still elements in the rightHalf, add it to tempProdList
+                    tempProdList[k] = rightHalf[j]
+                    j += 1
+                    k += 1
+
+                print("Pass:")
+                print("-----------------------------------------------")
+                for item in tempProdList:
+                    print(f"Product_ID: {item.get_Prod_id()}")
+                print("-----------------------------------------------")
+
+        mergeSort(tempProdList)
+
+        print()
+        print("---------------Merge Sorted Stationary List---------------")
+        for product in range(len(tempProdList)):
+            print(f"Product ID: {tempProdList[product].get_Prod_id()}")
+            print(f"Product Name: {tempProdList[product].get_ProdName()}")
+            print(f"Product Category: {tempProdList[product].get_category()}")
+            print(f"Brand: {tempProdList[product].get_brand()}")
+            print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
+            print(f"Stock: {tempProdList[product].get_Stock()}")
+            print("-----------------------------------------------")
+
+        prodDict = {}
+        for stationary in tempProdList: # clear the previous dict
+            prodDict[stationary.get_Prod_id()] = stationary  # update dictionary with merge-sorted values
 
 def restockProduct():
     pass
