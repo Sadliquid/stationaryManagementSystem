@@ -266,7 +266,7 @@ def restockProduct():
             break
         else:
             print()
-            print("Product ID not found in the system. Please enter a valid Product ID.")
+            print("Invalid Product ID. Please try again!")
             print()
 
 
@@ -277,7 +277,48 @@ def numberOfStockArrival():
     print(f"Number of restocking in queue: {deliveryQueue.len()}")
 
 def serviceNextRestock():
-    pass
+    global prodDict
+    global deliveryQueue
+    if deliveryQueue.isEmpty():
+        print()
+        print("No restocking in queue.")
+    else:
+        restockDetail = deliveryQueue.dequeue()
+        productKeysList = list(prodDict.keys())
+        restockProdID = restockDetail.get_Prod_id()
+        restockQuantity = restockDetail.get_quantity()
+        searchResult = sequentialSearch(productKeysList, restockProdID)
+        if searchResult != -1:
+            print()
+            print("Display pending stock arrival: ")
+            print("--------------------------------")
+            print(f"Product ID: {restockProdID}")
+            print(f"Product Name: {prodDict[restockProdID].get_ProdName()}")
+            print(f"Product Category: {prodDict[restockProdID].get_category()}")
+            print(f"Brand: {prodDict[restockProdID].get_brand()}")
+            print(f"Supplier Year: {prodDict[restockProdID].get_Supplier_since()}")
+            print(f"Stock remaining: {prodDict[restockProdID].get_Stock()}")
+            print("--------------------------------")
+            print(f"New Stock: {restockQuantity}")
+            print("--------------------------------")
+            
+            print()
+            print(f"Remaining restocks in queue: {deliveryQueue.len()}")
+            print()
+            
+            proceedWithRestocking = input("Proceed with restocking? (Y/N): ")
+            if proceedWithRestocking.upper() == "Y":
+                prodDict[restockProdID].set_Stock(prodDict[restockProdID].get_Stock() + restockQuantity)
+                print(f"Product ID {prodDict[restockProdID].get_Prod_id()} updated stock: {prodDict[restockProdID].get_Stock()}")
+            elif proceedWithRestocking.upper() == "N":
+                deliveryQueue.enqueue(restockDetail)
+                print("Restocking not serviced.")
+            else:
+                deliveryQueue.enqueue(restockDetail)
+                print("Invalid choice. Restocking cancelled.")
+        else:
+            print()
+            print("Invalid Product ID. Restocking not serviced.")
 
 def restockMenu():
     while True:
