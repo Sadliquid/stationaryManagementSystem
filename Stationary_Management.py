@@ -104,7 +104,7 @@ def bubbleSortStationary():
             print("-----------------------------------------------")
         
         print()
-        print("---------------Bubble Sorted Stationary List---------------")
+        print("---------Bubble Sorted Stationary List---------")
         for product in range(len(tempProdList)):
             print(f"Product ID: {tempProdList[product].get_Prod_id()}")
             print(f"Product Name: {tempProdList[product].get_ProdName()}")
@@ -145,7 +145,7 @@ def insertionSortStationary():
             print("-----------------------------------------------")
 
         print()
-        print("---------------Insertion Sorted Stationary List---------------")
+        print("--------Insertion Sorted Stationary List-------")
         for product in range(len(tempProdList)):
             print(f"Product ID: {tempProdList[product].get_Prod_id()}")
             print(f"Product Name: {tempProdList[product].get_ProdName()}")
@@ -182,7 +182,7 @@ def selectionSortStationary(): # Sort by descending order of Prod_id
             print("-----------------------------------------------")
 
         print()
-        print("---------------Selection Sorted Stationary List---------------")
+        print("--------Selection Sorted Stationary List-------")
         for product in range(len(tempProdList)):
             print(f"Product ID: {tempProdList[product].get_Prod_id()}")
             print(f"Product Name: {tempProdList[product].get_ProdName()}")
@@ -244,7 +244,7 @@ def mergeSortStationary():
         mergeSort(tempProdList)
 
         print()
-        print("---------------Merge Sorted Stationary List---------------")
+        print("----------Merge Sorted Stationary List---------")
         for product in range(len(tempProdList)):
             print(f"Product ID: {tempProdList[product].get_Prod_id()}")
             print(f"Product Name: {tempProdList[product].get_ProdName()}")
