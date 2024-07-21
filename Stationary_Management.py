@@ -8,6 +8,7 @@ from RestockingQ import RestockingQ
 
 prodDict = {} # global dictionary
 deliveryQueue = RestockingQ() # global queue
+recordsPerRow = 1 # default value
 
 
 def addStationary():
@@ -283,11 +284,11 @@ def serviceNextRestock():
         print()
         print("No restocking in queue.")
     else:
-        restockDetail = deliveryQueue.dequeue()
-        productKeysList = list(prodDict.keys())
+        restockDetail = deliveryQueue.dequeue() # pop the first restock in queue (FIFO)
+        productKeysList = list(prodDict.keys()) # list of all product IDs
         restockProdID = restockDetail.get_Prod_id()
         restockQuantity = restockDetail.get_quantity()
-        searchResult = sequentialSearch(productKeysList, restockProdID)
+        searchResult = sequentialSearch(productKeysList, restockProdID) # search for the product ID to check if it exists
         if searchResult != -1:
             print()
             print("Display pending stock arrival: ")
@@ -308,13 +309,13 @@ def serviceNextRestock():
             
             proceedWithRestocking = input("Proceed with restocking? (Y/N): ")
             if proceedWithRestocking.upper() == "Y":
-                prodDict[restockProdID].set_Stock(prodDict[restockProdID].get_Stock() + restockQuantity)
+                prodDict[restockProdID].set_Stock(prodDict[restockProdID].get_Stock() + restockQuantity) # update stock
                 print(f"Product ID {prodDict[restockProdID].get_Prod_id()} updated stock: {prodDict[restockProdID].get_Stock()}")
             elif proceedWithRestocking.upper() == "N":
-                deliveryQueue.enqueue(restockDetail)
+                deliveryQueue.enqueue(restockDetail) # put the restock back to the end of the queue
                 print("Restocking not serviced.")
             else:
-                deliveryQueue.enqueue(restockDetail)
+                deliveryQueue.enqueue(restockDetail) # put the restock back to the end of the queue
                 print("Invalid choice. Restocking cancelled.")
         else:
             print()
@@ -350,7 +351,20 @@ def restockMenu():
             print("Please enter a valid number as a choice.")
 
 def setRecordsPerRow():
-    pass
+    global recordsPerRow
+    numberOfRecords = input("Enter number of records per row to display: ")
+    try:
+        numberOfRecords = int(numberOfRecords)
+        if numberOfRecords > 0:
+            recordsPerRow = numberOfRecords
+            print()
+            print(f"Number of records per row set to: {recordsPerRow}")
+        else:
+            print()
+            print("Please enter a number thats greater than 0.")
+    except ValueError:
+        print()
+        print("Please enter a valid number.")
 
 def sequentialSearch(array, target):
     for i in range(len(array)):
