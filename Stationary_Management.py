@@ -103,16 +103,18 @@ def bubbleSortStationary():
                 print(f"Product_ID: {tempProdList[k].get_Prod_id()}")
             print("-----------------------------------------------")
         
-        print()
-        print("---------Bubble Sorted Stationary List---------")
-        for product in range(len(tempProdList)):
-            print(f"Product ID: {tempProdList[product].get_Prod_id()}")
-            print(f"Product Name: {tempProdList[product].get_ProdName()}")
-            print(f"Product Category: {tempProdList[product].get_category()}")
-            print(f"Brand: {tempProdList[product].get_brand()}")
-            print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
-            print(f"Stock: {tempProdList[product].get_Stock()}")
-            print("-----------------------------------------------")
+        productStringList = [] # list to store each product as a string
+        for stationary in tempProdList:
+            product = f"""
+                Product ID: {stationary.get_Prod_id()}
+                Product Name: {stationary.get_ProdName()}
+                Product Category: {stationary.get_category()}
+                Brand: {stationary.get_brand()}
+                Supplier Year: {stationary.get_Supplier_since()}
+                Stock: {stationary.get_Stock()}
+            """
+            productStringList.append(clean_and_split(product))
+        display_in_chunks(productStringList, recordsPerRow) # display the products in chunks of records per row
 
         prodDict = {} # clear the previous dict
         for stationary in tempProdList:
@@ -144,16 +146,18 @@ def insertionSortStationary():
                 print(f"Product_ID: {tempProdList[k].get_Prod_id()}")
             print("-----------------------------------------------")
 
-        print()
-        print("--------Insertion Sorted Stationary List-------")
-        for product in range(len(tempProdList)):
-            print(f"Product ID: {tempProdList[product].get_Prod_id()}")
-            print(f"Product Name: {tempProdList[product].get_ProdName()}")
-            print(f"Product Category: {tempProdList[product].get_category()}")
-            print(f"Brand: {tempProdList[product].get_brand()}")
-            print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
-            print(f"Stock: {tempProdList[product].get_Stock()}")
-            print("-----------------------------------------------")
+        productStringList = [] # list to store each product as a string
+        for stationary in tempProdList:
+            product = f"""
+                Product ID: {stationary.get_Prod_id()}
+                Product Name: {stationary.get_ProdName()}
+                Product Category: {stationary.get_category()}
+                Brand: {stationary.get_brand()}
+                Supplier Year: {stationary.get_Supplier_since()}
+                Stock: {stationary.get_Stock()}
+            """
+            productStringList.append(clean_and_split(product))
+        display_in_chunks(productStringList, recordsPerRow) # display the products in chunks of records per row
 
         prodDict = {}
         for stationary in tempProdList: # clear previous dict
@@ -181,16 +185,18 @@ def selectionSortStationary(): # Sort by descending order of Prod_id
                 print(f"Product_ID: {tempProdList[k].get_Prod_id()}")
             print("-----------------------------------------------")
 
-        print()
-        print("--------Selection Sorted Stationary List-------")
-        for product in range(len(tempProdList)):
-            print(f"Product ID: {tempProdList[product].get_Prod_id()}")
-            print(f"Product Name: {tempProdList[product].get_ProdName()}")
-            print(f"Product Category: {tempProdList[product].get_category()}")
-            print(f"Brand: {tempProdList[product].get_brand()}")
-            print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
-            print(f"Stock: {tempProdList[product].get_Stock()}")
-            print("-----------------------------------------------")
+        productStringList = [] # list to store each product as a string
+        for stationary in tempProdList:
+            product = f"""
+                Product ID: {stationary.get_Prod_id()}
+                Product Name: {stationary.get_ProdName()}
+                Product Category: {stationary.get_category()}
+                Brand: {stationary.get_brand()}
+                Supplier Year: {stationary.get_Supplier_since()}
+                Stock: {stationary.get_Stock()}
+            """
+            productStringList.append(clean_and_split(product))
+        display_in_chunks(productStringList, recordsPerRow) # display the products in chunks of records per row
 
         prodDict = {} # clear the previous dict
         for stationary in tempProdList:
@@ -243,16 +249,18 @@ def mergeSortStationary():
 
         mergeSort(tempProdList)
 
-        print()
-        print("----------Merge Sorted Stationary List---------")
-        for product in range(len(tempProdList)):
-            print(f"Product ID: {tempProdList[product].get_Prod_id()}")
-            print(f"Product Name: {tempProdList[product].get_ProdName()}")
-            print(f"Product Category: {tempProdList[product].get_category()}")
-            print(f"Brand: {tempProdList[product].get_brand()}")
-            print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
-            print(f"Stock: {tempProdList[product].get_Stock()}")
-            print("-----------------------------------------------")
+        productStringList = [] # list to store each product as a string
+        for stationary in tempProdList:
+            product = f"""
+                Product ID: {stationary.get_Prod_id()}
+                Product Name: {stationary.get_ProdName()}
+                Product Category: {stationary.get_category()}
+                Brand: {stationary.get_brand()}
+                Supplier Year: {stationary.get_Supplier_since()}
+                Stock: {stationary.get_Stock()}
+            """
+            productStringList.append(clean_and_split(product))
+        display_in_chunks(productStringList, recordsPerRow) # display the products in chunks of records per row
 
         prodDict = {} # clear the previous dict
         for stationary in tempProdList:
