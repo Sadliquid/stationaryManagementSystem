@@ -63,21 +63,25 @@ def addStationary():
     
 
 def displayStationary():
+    global recordsPerRow
     global prodDict
     if len(prodDict) == 0:
         print()
         print("There are currently no products in the system!")
     else:
-        print()
-        print("---------------------Products List---------------------")
+        productStringList = [] # list to store each product as a string
         for stationary in prodDict.values():
-            print(f"Product ID: {stationary.get_Prod_id()}")
-            print(f"Product Name: {stationary.get_ProdName()}")
-            print(f"Product Category: {stationary.get_category()}")
-            print(f"Brand: {stationary.get_brand()}")
-            print(f"Supplier Year: {stationary.get_Supplier_since()}")
-            print(f"Stock: {stationary.get_Stock()}")
-            print("-----------------------------------------------")
+            product = f"""
+                Product ID: {stationary.get_Prod_id()}
+                Product Name: {stationary.get_ProdName()}
+                Product Category: {stationary.get_category()}
+                Brand: {stationary.get_brand()}
+                Supplier Year: {stationary.get_Supplier_since()}
+                Stock: {stationary.get_Stock()}
+            """
+            productStringList.append(clean_and_split(product))
+        display_in_chunks(productStringList, recordsPerRow) # display the products in chunks of records per row
+
 
 def bubbleSortStationary():
     global prodDict
@@ -110,9 +114,9 @@ def bubbleSortStationary():
             print(f"Stock: {tempProdList[product].get_Stock()}")
             print("-----------------------------------------------")
 
-        prodDict = {}
+        prodDict = {} # clear the previous dict
         for stationary in tempProdList:
-            prodDict[stationary.get_Prod_id()] = stationary # clear previous dict and update with sorted values
+            prodDict[stationary.get_Prod_id()] = stationary # update dictionary with bubble-sorted values
                 
 
 def insertionSortStationary():
@@ -152,8 +156,8 @@ def insertionSortStationary():
             print("-----------------------------------------------")
 
         prodDict = {}
-        for stationary in tempProdList:
-            prodDict[stationary.get_Prod_id()] = stationary # clear previous dict and update with sorted values
+        for stationary in tempProdList: # clear previous dict
+            prodDict[stationary.get_Prod_id()] = stationary # update dictionary with insertion-sorted values
 
 def selectionSortStationary(): # Sort by descending order of Prod_id
     global prodDict
@@ -187,6 +191,10 @@ def selectionSortStationary(): # Sort by descending order of Prod_id
             print(f"Supplier Year: {tempProdList[product].get_Supplier_since()}")
             print(f"Stock: {tempProdList[product].get_Stock()}")
             print("-----------------------------------------------")
+
+        prodDict = {} # clear the previous dict
+        for stationary in tempProdList:
+            prodDict[stationary.get_Prod_id()] = stationary # update dictionary with selection-sorted values
 
 def mergeSortStationary():
     global prodDict
@@ -246,8 +254,8 @@ def mergeSortStationary():
             print(f"Stock: {tempProdList[product].get_Stock()}")
             print("-----------------------------------------------")
 
-        prodDict = {}
-        for stationary in tempProdList: # clear the previous dict
+        prodDict = {} # clear the previous dict
+        for stationary in tempProdList:
             prodDict[stationary.get_Prod_id()] = stationary  # update dictionary with merge-sorted values
 
 def restockProduct():
@@ -269,8 +277,6 @@ def restockProduct():
             print()
             print("Invalid Product ID. Please try again!")
             print()
-
-
 
 def numberOfStockArrival():
     global deliveryQueue
@@ -365,6 +371,26 @@ def setRecordsPerRow():
     except ValueError:
         print()
         print("Please enter a valid number.")
+
+def clean_and_split(product_string): # split each product string into lines and remove leading/trailing spaces
+    return [line.strip() for line in product_string.strip().split('\n')]
+
+def display_in_chunks(strings, num_per_row, spacing=' ', column_width=45, start=0):
+    def truncate_text(text, width):
+        return text if len(text) <= width else text[:width-3] + '...'
+    
+    if start >= len(strings):
+        return # prevent maximum recursion depth exceeded error
+    
+    chunk = strings[start:start + num_per_row]
+    transposed_text = list(zip(*chunk))
+    print()
+    for line in transposed_text:
+        formatted_line = [f"{truncate_text(field, column_width):<{column_width}}" for field in line]
+        print(spacing.join(formatted_line))
+    print()
+    
+    display_in_chunks(strings, num_per_row, spacing, column_width, start + num_per_row) # print next chunk recursively
 
 def sequentialSearch(array, target):
     for i in range(len(array)):
