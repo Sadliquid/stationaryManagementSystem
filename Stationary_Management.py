@@ -366,19 +366,26 @@ def restockMenu():
 
 def setRecordsPerRow():
     global recordsPerRow
-    numberOfRecords = input("Enter number of records per row to display: ")
-    try:
-        numberOfRecords = int(numberOfRecords)
-        if numberOfRecords > 0:
-            recordsPerRow = numberOfRecords
+    while True:
+        numberOfRecords = input("Enter number of records per row to display (Max 3 rows): ")
+        try:
+            numberOfRecords = int(numberOfRecords)
+            if 3 >= numberOfRecords > 0:
+                recordsPerRow = numberOfRecords
+                print()
+                print(f"Number of records per row set to: {recordsPerRow}")
+                break
+            elif numberOfRecords > 3:
+                print()
+                print("Displaying more than 3 records per row may cause the text to be misaligned. Please enter a number less than or equal to 3.")
+                print()
+            else:
+                print()
+                print("Please enter a number thats greater than 0.")
+                print()
+        except ValueError:
             print()
-            print(f"Number of records per row set to: {recordsPerRow}")
-        else:
-            print()
-            print("Please enter a number thats greater than 0.")
-    except ValueError:
-        print()
-        print("Please enter a valid number.")
+            print("Please enter a valid number.")
 
 def clean_and_split(product_string): # split each product string into lines and remove leading/trailing spaces
     return [line.strip() for line in product_string.strip().split('\n')]
