@@ -2,9 +2,9 @@
 # Student Admin Number: 230627W
 # Tutorial Group: IT2153-01
 
-from Stationary import Stationary
-from RestockDetail import RestockDetail
-from RestockingQ import RestockingQ
+from Stationary import Stationary # Stationary class
+from RestockDetail import RestockDetail # RestockDetail class (for products to be restocked)
+from RestockingQ import RestockingQ # Queue ADT
 
 prodDict = {} # global dictionary
 deliveryQueue = RestockingQ() # global queue
@@ -393,20 +393,20 @@ def clean_and_split(product_string): # split each product string into lines and 
 
 def display_in_chunks(strings, num_per_row, spacing=' ', column_width=45, start=0):
     def truncate_text(text, width):
-        return text if len(text) <= width else text[:width-3] + '...'
+        return text if len(text) <= width else text[:width-3] + '...' # truncate text if it exceeds column width, remove 3 characters for '...'
     
     if start >= len(strings):
         return # prevent maximum recursion depth exceeded error
     
     chunk = strings[start:start + num_per_row]
-    transposed_text = list(zip(*chunk))
+    transposed_text = list(zip(*chunk)) # convert rows to columns, so thy can be formatted into "chunks"
     print()
     for line in transposed_text:
-        formatted_line = [f"{truncate_text(field, column_width):<{column_width}}" for field in line]
+        formatted_line = [f"{truncate_text(field, column_width):<{column_width}}" for field in line] # ":" specifies the start of the format specifier, "<" left-aligns the text
         print(spacing.join(formatted_line))
     print()
     
-    display_in_chunks(strings, num_per_row, spacing, column_width, start + num_per_row) # print next chunk recursively
+    display_in_chunks(strings, num_per_row, spacing, column_width, start + num_per_row) # print next chunk recursively. "start" incrrements by num_per_row each time
 
 def sequentialSearch(array, target):
     for i in range(len(array)):
