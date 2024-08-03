@@ -323,7 +323,7 @@ def serviceNextRestock():
             proceedWithRestocking = input("Proceed with restocking? (Y/N): ")
             if proceedWithRestocking.upper() == "Y":
                 prodDict[restockProdID].set_Stock(prodDict[restockProdID].get_Stock() + restockQuantity) # update stock
-                print()
+                print() 
                 print(f"Product ID {prodDict[restockProdID].get_Prod_id()} updated stock: {prodDict[restockProdID].get_Stock()}")
             elif proceedWithRestocking.upper() == "N":
                 deliveryQueue.enqueue(restockDetail) # put the restock back to the end of the queue
